@@ -1,51 +1,54 @@
 package com.tw.step.rover.roversystem;
 
-import com.tw.step.rover.commands.RoverCommands;
 import com.tw.step.rover.position.Coordinate;
 import com.tw.step.rover.position.Direction;
 
 public class RoverSystemScanner {
-    private final String[] tokens;
-    private int currentIndex;
+  private final String[] tokens;
+  private int currentIndex;
 
-    private RoverSystemScanner(String[] tokens) {
-        this.tokens = tokens;
-        this.currentIndex = 0;
-    }
+  private RoverSystemScanner(String[] tokens) {
+    this.tokens = tokens;
+    this.currentIndex = 0;
+  }
 
-    public String peek() {
-        if(this.isDone()) return null;
-        return this.tokens[this.currentIndex];
-    }
+  public static RoverSystemScanner from(String input) {
+    String[] tokens = input.split("[\n\t ]+");
+    return new RoverSystemScanner(tokens);
+  }
 
-    private boolean isDone() {
-        return this.currentIndex >= this.tokens.length;
-    }
+  public Coordinate scanBoundary() {
+    return this.scanCoordinate();
+  }
 
-    public String consume() {
-        String token = this.peek();
-        if(this.currentIndex < this.tokens.length) {
-            this.currentIndex++;
-        }
-        return token;
-    }
+  public String peek() {
+    if (this.isDone()) return null;
+    return this.tokens[this.currentIndex];
+  }
 
-    public static RoverSystemScanner from(String input) {
-        String[] tokens = input.split("[\n\t ]+");
-        return new RoverSystemScanner(tokens);
-    }
+  private boolean isDone() {
+    return this.currentIndex >= this.tokens.length;
+  }
 
-    public int scanNumber() {
-        return Integer.parseInt(consume());
+  public String consume() {
+    String token = this.peek();
+    if (this.currentIndex < this.tokens.length) {
+      this.currentIndex++;
     }
+    return token;
+  }
 
-    public Coordinate scanCoordinate() {
-        int x = this.scanNumber();
-        int y = this.scanNumber();
-        return new Coordinate(x,y);
-    }
+  public int scanNumber() {
+    return Integer.parseInt(consume());
+  }
 
-    public Direction scanDirection() {
-        return Direction.valueOf(this.consume());
-    }
+  public Coordinate scanCoordinate() {
+    int x = this.scanNumber();
+    int y = this.scanNumber();
+    return new Coordinate(x, y);
+  }
+
+  public Direction scanDirection() {
+    return Direction.valueOf(this.consume());
+  }
 }
