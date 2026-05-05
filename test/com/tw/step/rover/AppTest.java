@@ -20,6 +20,6 @@ class AppTest {
       System.setOut(originalOut);
     }
 
-    assertEquals("-1 2 N" + System.lineSeparator(), output.toString());
+    assertEquals("-1 2 N\nstatus: lost" + System.lineSeparator(), output.toString());
   }
 }

@@ -10,16 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 class DeadRoverStateTest {
-    @Test
-    void shouldIgnoreAllCommands() {
-        Rover rover = new Rover(new Coordinate(1, 1), Direction.N);
-        DeadRoverState state = new DeadRoverState(rover);
-        Navigator navigator = Navigator.create();
-        InfinitePlateau boundary = new InfinitePlateau();
+  @Test
+  void shouldIgnoreAllCommands() {
+    Rover rover = new Rover(new Coordinate(1, 1), Direction.N);
+    DeadRoverState state = new DeadRoverState(rover);
+    Navigator navigator = Navigator.create();
+    InfinitePlateau boundary = new InfinitePlateau();
 
-        assertSame(state, state.turnLeft(navigator, boundary));
-        assertSame(state, state.turnRight(navigator, boundary));
-        assertSame(state, state.move(navigator, boundary));
-        assertEquals("1 1 N", rover.toString());
-    }
+    assertSame(state, state.turnLeft(navigator, boundary));
+    assertSame(state, state.turnRight(navigator, boundary));
+    assertSame(state, state.move(navigator, boundary));
+    assertEquals("1 1 N\nstatus: active", rover.toString());
+  }
 }

@@ -7,41 +7,39 @@ import com.tw.step.rover.position.Direction;
 import com.tw.step.rover.position.Navigator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 class LiveRoverStateTest {
-    @Test
-    void shouldTurnAndStayLive() {
-        Rover rover = new Rover(new Coordinate(1, 1), Direction.N);
-        LiveRoverState state = new LiveRoverState(rover);
+  @Test
+  void shouldTurnAndStayLive() {
+    Rover rover = new Rover(new Coordinate(1, 1), Direction.N);
+    LiveRoverState state = new LiveRoverState(rover);
 
-        RoverState nextState = state.turnLeft(Navigator.create(), new InfinitePlateau());
+    RoverState nextState = state.turnLeft(Navigator.create(), new InfinitePlateau());
 
-        assertSame(state, nextState);
-        assertEquals("1 1 W", rover.toString());
-    }
+    assertSame(state, nextState);
+    assertEquals("1 1 W\nstatus: active", rover.toString());
+  }
 
-    @Test
-    void shouldMoveAndStayLiveWithinBoundary() {
-        Rover rover = new Rover(new Coordinate(1, 1), Direction.N);
-        LiveRoverState state = new LiveRoverState(rover);
+  @Test
+  void shouldMoveAndStayLiveWithinBoundary() {
+    Rover rover = new Rover(new Coordinate(1, 1), Direction.N);
+    LiveRoverState state = new LiveRoverState(rover);
 
-        RoverState nextState = state.move(Navigator.create(), new InfinitePlateau());
+    RoverState nextState = state.move(Navigator.create(), new InfinitePlateau());
 
-        assertSame(state, nextState);
-        assertEquals("1 2 N", rover.toString());
-    }
+    assertSame(state, nextState);
+    assertEquals("1 2 N\nstatus: active", rover.toString());
+  }
 
-    @Test
-    void shouldBecomeDeadWhenRoverStartsOutsideBoundary() {
-        Rover rover = new Rover(new Coordinate(5, 5), Direction.N);
-        LiveRoverState state = new LiveRoverState(rover);
+  @Test
+  void shouldBecomeDeadWhenRoverStartsOutsideBoundary() {
+    Rover rover = new Rover(new Coordinate(5, 5), Direction.N);
+    LiveRoverState state = new LiveRoverState(rover);
 
-        RoverState nextState = state.move(Navigator.create(), new Plateau(new Coordinate(0, 0), new Coordinate(2, 2)));
+    RoverState nextState = state.move(Navigator.create(), new Plateau(new Coordinate(0, 0), new Coordinate(2, 2)));
 
-        assertInstanceOf(DeadRoverState.class, nextState);
-        assertEquals("5 5 N", rover.toString());
-    }
+    assertInstanceOf(DeadRoverState.class, nextState);
+    assertEquals("5 5 N\nstatus: active", rover.toString());
+  }
 }

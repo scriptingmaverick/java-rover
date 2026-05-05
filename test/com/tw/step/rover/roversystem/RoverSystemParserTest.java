@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RoverSystemParserTest {
-    @Test
-    void shouldParseAndExecuteRoverSystem() {
-        RoverSystemScanner scanner = RoverSystemScanner.from("1 2 N\nRFF");
-        RoverSystemParser parser = new RoverSystemParser(scanner, Navigator.create(), new InfinitePlateau(), new CommandCreator());
+  @Test
+  void shouldParseAndExecuteRoverSystem() {
+    RoverSystemScanner scanner = RoverSystemScanner.from("1 2 N\nRFF");
+    RoverSystemParser parser = new RoverSystemParser(scanner, Navigator.create(), new InfinitePlateau(), new CommandCreator());
 
-        RoverSystem roverSystem = parser.parse();
-        roverSystem.execute();
+    RoverSystem roverSystem = parser.parse();
+    roverSystem.execute();
 
-        assertEquals("3 2 E", roverSystem.toString());
-    }
+    assertEquals("3 2 E\nstatus: active", roverSystem.toString());
+  }
 }

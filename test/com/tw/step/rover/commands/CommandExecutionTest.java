@@ -10,19 +10,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandExecutionTest {
-    @Test
-    void shouldExecuteSingleCommands() {
-        Navigator navigator = Navigator.create();
-        InfinitePlateau boundary = new InfinitePlateau();
-        Rover rover = new Rover(new Coordinate(0, 0), Direction.N);
+  @Test
+  void shouldExecuteSingleCommands() {
+    Navigator navigator = Navigator.create();
+    InfinitePlateau boundary = new InfinitePlateau();
+    Rover rover = new Rover(new Coordinate(0, 0), Direction.N);
 
-        new TurnLeftCommand(navigator, boundary).execute(rover);
-        assertEquals("0 0 W", rover.toString());
+    new TurnLeftCommand(navigator, boundary).execute(rover);
+    assertEquals("0 0 W\nstatus: active", rover.toString());
 
-        new TurnRightCommand(navigator, boundary).execute(rover);
-        assertEquals("0 0 N", rover.toString());
+    new TurnRightCommand(navigator, boundary).execute(rover);
+    assertEquals("0 0 N\nstatus: active", rover.toString());
 
-        new MoveCommand(navigator, boundary).execute(rover);
-        assertEquals("0 1 N", rover.toString());
-    }
+    new MoveCommand(navigator, boundary).execute(rover);
+    assertEquals("0 1 N\nstatus: active", rover.toString());
+  }
 }

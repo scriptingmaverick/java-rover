@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RoverTest {
-    @Test
-    void shouldTurnAndMove() {
-        Rover rover = new Rover(new Coordinate(0, 0), Direction.N);
-        Navigator navigator = Navigator.create();
-        InfinitePlateau boundary = new InfinitePlateau();
+  @Test
+  void shouldTurnAndMove() {
+    Rover rover = new Rover(new Coordinate(0, 0), Direction.N);
+    Navigator navigator = Navigator.create();
+    InfinitePlateau boundary = new InfinitePlateau();
 
-        rover.turnRight(navigator, boundary);
-        rover.move(navigator, boundary);
+    rover.turnRight(navigator, boundary);
+    rover.move(navigator, boundary);
 
-        assertEquals("1 0 E", rover.toString());
-    }
+    assertEquals("1 0 E\nstatus: active", rover.toString());
+  }
 }
