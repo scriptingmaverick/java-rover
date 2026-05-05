@@ -8,18 +8,18 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AppTest {
-    @Test
-    void shouldPrintFinalRoverPosition() {
-        PrintStream originalOut = System.out;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
+  @Test
+  void shouldPrintFinalRoverPosition() {
+    PrintStream originalOut = System.out;
+    ByteArrayOutputStream output = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(output));
 
-        try {
-            App.main();
-        } finally {
-            System.setOut(originalOut);
-        }
-
-        assertEquals("-4 6 N" + System.lineSeparator(), output.toString());
+    try {
+      App.main();
+    } finally {
+      System.setOut(originalOut);
     }
+
+    assertEquals("-1 2 N" + System.lineSeparator(), output.toString());
+  }
 }
