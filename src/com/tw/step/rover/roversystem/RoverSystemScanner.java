@@ -51,4 +51,10 @@ public class RoverSystemScanner {
   public Direction scanDirection() {
     return Direction.valueOf(this.consume());
   }
+
+  public void print() {
+    for (String token : tokens) {
+      System.out.println(token);
+    }
+  }
 }

@@ -20,6 +20,6 @@ class AppTest {
       System.setOut(originalOut);
     }
 
-    assertEquals("-1 2 N\nstatus: lost" + System.lineSeparator(), output.toString());
+    assertEquals("6 3 E\nstatus: active\n3 4 E\nstatus: active" + System.lineSeparator(), output.toString());
   }
 }
